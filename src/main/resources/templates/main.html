@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form th:method="POST" th:action="@{/}">
+    <form th:method="POST" th:action="@{/main}">
         <input type="text" name="text" placeholder="Введите сообщение">
         <input type="text" name="tag" placeholder="Tag">
         <button type="submit">Добавить</button>
@@ -14,7 +14,7 @@
 </div>
 <div>Список сообщений</div>
 <div>
-    <form th:method="POST" th:action="{filter}">
+    <form th:method="POST" th:action="@{/filter}">
         <input type="text" name="filter">
         <button type="submit">Найти</button>
     </form>

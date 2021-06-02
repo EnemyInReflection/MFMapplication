@@ -17,7 +17,7 @@ public class TestController {
     private MessageRepo messageRepo;
 
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Model model) {
 
         Iterable<Message> messages = messageRepo.findAll();
@@ -26,7 +26,7 @@ public class TestController {
         return "main";
     }
 
-    @PostMapping()
+    @PostMapping("/main")
     public String add(@RequestParam String text, @RequestParam String tag, Model model) {
 
         Message message = new Message(text, tag);
@@ -41,9 +41,13 @@ public class TestController {
 
     @PostMapping("/filter")
     public String filter(@RequestParam String filter, Model model){
-
-        Iterable<Message> messages=messageRepo.findByTag(filter);
-
+        Iterable<Message> messages;
+        if(filter !=null && !filter.isEmpty()) {
+            messages=messageRepo.findByTag(filter);
+        }
+        else {
+            messages=messageRepo.findAll();
+        }
         model.addAttribute("messages", messages);
 
         return "main";
