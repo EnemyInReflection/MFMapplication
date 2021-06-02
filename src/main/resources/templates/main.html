@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Some page</title>
+</head>
+<body>
+<div>
+    <form th:method="POST" >
+        <input type="text" name="text" placeholder="Введите сообщение">
+        <input type="text" name="tag" placeholder="Tag">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+<div>Список сообщений</div>
+<div th:each="message: ${messages}">
+    <b th:text="${message.id}">VALUE</b>
+    <span th:text="${message.text}">VALUE</span>
+    <i th:text="${message.tag}">VALUE</i>
+</div>
+</body>
+</html>
