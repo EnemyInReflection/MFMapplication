@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class TestController {
     @Autowired
@@ -31,6 +33,17 @@ public class TestController {
         messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
+        model.addAttribute("messages", messages);
+
+        return "main";
+    }
+
+
+    @PostMapping("/filter")
+    public String filter(@RequestParam String filter, Model model){
+
+        Iterable<Message> messages=messageRepo.findByTag(filter);
+
         model.addAttribute("messages", messages);
 
         return "main";
